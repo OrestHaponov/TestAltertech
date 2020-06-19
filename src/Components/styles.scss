@@ -13,8 +13,21 @@
             text-align: left;
         }
         td{
+            position: relative;
             border-top: 1px solid #000;
             padding: 20px;
+            img{
+                position: absolute;
+                top: 2px;
+                width: 21px;
+                left: 2px;
+            }
+        }
+        .count{
+            display: flex;
+            input{
+                width: 50px;
+            }
         }
     }
 }
