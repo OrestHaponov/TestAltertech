@@ -1,7 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
-import {changeCount,increase,decrease,changeTotal,deleteProduc} from "../Store/Action/Bucket";
-import DeleteProd from "../images/delete.png"
+import {changeCount,increase,decrease,changeTotal,deleteProduct} from "../Store/Action/Bucket";
+import DeleteProd from "../images/delete.png";
+import TableHead from "./TableHead";
 
 class Bucket extends React.Component{
     constructor(props){
@@ -27,14 +28,7 @@ class Bucket extends React.Component{
             <div className="bucket">
                 <div className="wrapper">
                     <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Count</th>
-                                <th>Price</th>
-                                <th>Total </th>
-                            </tr>
-                        </thead>
+                        <TableHead />
                             {this.props.bucket.map((value,index)=>{
                                 return(
                                     <thead key={index}>
@@ -75,7 +69,6 @@ function mapStateToProps(state){
     return{
         bucket: state.Bucket.bucket,
         sumTotal: state.Bucket.sumTotal,
-        priceFromMinToMax: state.Bucket.priceFromMinToMax,
     }
 }
 

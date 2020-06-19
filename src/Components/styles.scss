@@ -8,6 +8,14 @@
         border-collapse: collapse;
         border: 1px solid #000;
         width: 500px;
+        thead:first-child{
+            th{
+                cursor: pointer;
+            }
+            th:nth-child(2){
+                cursor: auto;
+            }
+        }
         th{
             padding: 20px;
             text-align: left;

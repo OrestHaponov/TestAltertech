@@ -1,4 +1,4 @@
-import {CLEAR,REFRESH_BUCKET,ADD_TOTAL_COUNT} from "./ActionTypes";
+import {CLEAR,REFRESH_BUCKET,ADD_TOTAL_COUNT,SORT_PRICE,SORT_NAME,SORT_TOTAL} from "./ActionTypes";
 
 // USING IN PRODUCT COUNT LOGIC,INCREASE,DECREASE,DELETE PRODUCT
 export function clear(){
@@ -90,5 +90,79 @@ export function changeCount(product,bucket){
         return(dispatch)=>{
             bucket = bucket.filter(removeProd => removeProd != product);
             dispatch(reFresh(bucket));
+        }
+    }
+
+// SORT LOGIC
+
+    export function sortByPrice(bucket,priceFromMinToMax){
+        return(dispatch)=>{
+            bucket.sort(function(min, max){
+                if(priceFromMinToMax){
+                    return min.price-max.price;
+                }else{
+                    return max.price-min.price
+                }
+            })
+            dispatch(sortPrice());
+            dispatch(clear());
+            dispatch(reFresh(bucket));
+        }
+    }
+
+    export function sortPrice(){
+        return{
+            type: SORT_PRICE
+        }
+    }
+
+    export function sortByABC(bucket,nameFromAToZ){
+        return(dispatch)=>{
+            bucket.sort(function(a, b){
+                var nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
+                    if(nameFromAToZ){
+                        if (nameA < nameB) 
+                            return -1
+                        if (nameA > nameB)
+                            return 1
+                        return 0
+                    }else{
+                        if (nameA > nameB) 
+                        return -1
+                        if (nameA < nameB)
+                            return 1
+                        return 0
+                    }
+                })
+            dispatch(sortName());
+            dispatch(clear());
+            dispatch(reFresh(bucket));
+        }
+    }
+
+    export function sortName(){
+        return{
+            type: SORT_NAME
+        }
+    }
+
+    export function sortByTotalProduct(bucket,totalFromMinToMax){
+        return(dispatch)=>{
+            bucket.sort(function(min, max){
+                if(totalFromMinToMax){
+                    return (min.price*min.count-max.price*max.count)
+                }else{
+                    return ( max.price*max.count-min.price*min.count)
+                }
+            })
+            dispatch(sortTotal());
+            dispatch(clear());
+            dispatch(reFresh(bucket));
+        }
+    }
+
+    export function sortTotal(){
+        return{
+            type: SORT_TOTAL
         }
     }

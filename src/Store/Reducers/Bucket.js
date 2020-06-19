@@ -1,9 +1,9 @@
-import {REFRESH_BUCKET,CLEAR,ADD_TOTAL_COUNT} from "../Action/ActionTypes";
+import {REFRESH_BUCKET,CLEAR,ADD_TOTAL_COUNT,SORT_PRICE,SORT_NAME,SORT_TOTAL} from "../Action/ActionTypes";
 
 const initialState ={
     bucket: [
         {
-            name: "zips one",
+            name: "Zyktrc",
             price: 100,
             count: 1,
         },
@@ -24,6 +24,9 @@ const initialState ={
         },
     ],
     sumTotal: 0,
+    priceFromMinToMax: false,
+    nameFromAToZ: false,
+    totalFromMinToMax: false,
 }
 
 export default function bucket(state = initialState, action){
@@ -40,6 +43,19 @@ export default function bucket(state = initialState, action){
             case ADD_TOTAL_COUNT:
                 return{
                     ...state, sumTotal: action.totalToPay
+                }
+        // SORT LOGIC
+            case SORT_PRICE:
+                return{
+                    ...state, priceFromMinToMax: !state.priceFromMinToMax
+                }
+            case SORT_NAME:
+                return{
+                    ...state, nameFromAToZ: !state.nameFromAToZ
+                }
+            case SORT_TOTAL:
+                return{
+                    ...state, totalFromMinToMax: !state.totalFromMinToMax
                 }
         default:
             return state
