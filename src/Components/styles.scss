@@ -1,0 +1,21 @@
+.bucket{
+    .wrapper{
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+    table{
+        border-collapse: collapse;
+        border: 1px solid #000;
+        width: 500px;
+        th{
+            padding: 20px;
+            text-align: left;
+        }
+        td{
+            border-top: 1px solid #000;
+            padding: 20px;
+        }
+    }
+}
+
