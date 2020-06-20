@@ -1,12 +1,6 @@
-import {CLEAR,REFRESH_BUCKET,ADD_TOTAL_COUNT,SORT_PRICE,SORT_NAME,SORT_TOTAL} from "./ActionTypes";
+import {REFRESH_BUCKET,ADD_TOTAL_COUNT,SORT_NAME,SORT_PRICE,SORT_TOTAL,SORT_COUNT} from "./ActionTypes";
 
 // USING IN PRODUCT COUNT LOGIC,INCREASE,DECREASE,DELETE PRODUCT
-export function clear(){
-    return{
-        type: CLEAR
-    }
-}
-
 export function reFresh(bucket){
     return{
         type: REFRESH_BUCKET,
@@ -15,7 +9,7 @@ export function reFresh(bucket){
 }
 
 // PRODUCT COUNT LOGIC
-export function changeCount(product,bucket){
+export function changeProductCount(product,bucket){
     return(dispatch)=>{
         bucket.map((value)=>{
             if(value == product){
@@ -23,7 +17,20 @@ export function changeCount(product,bucket){
                 value.count = newValue;
             }
         })
-        dispatch(clear());
+        dispatch(reFresh(bucket));
+    }
+}
+
+export function onBlurCheckCount(product,bucket){
+    return(dispatch)=>{
+        bucket.map((value)=>{
+            if(value == product){
+                if(value.count <= 0){
+                   alert("Only positive numbers");
+                   value.count = 1;
+                }
+            }
+        })
         dispatch(reFresh(bucket));
     }
 }
@@ -37,7 +44,7 @@ export function changeCount(product,bucket){
                     value.count ++;
                 }
             })
-            dispatch(clear());
+
             dispatch(reFresh(bucket));
         }
     }
@@ -48,8 +55,11 @@ export function changeCount(product,bucket){
         return(dispatch)=>{
             bucket.map((value)=>{
                 if(value == product){
+                    if(value.count === 0){
+                        alert("Just +")
+                    }
                     if(value.count === 1){
-                        let deleteProduct = confirm("Внатурі видалити?");
+                        let deleteProduct = confirm("Do you want delete this product?")
                         if(deleteProduct){
                             bucket = bucket.filter(removeProd => removeProd != value)
                         }
@@ -58,7 +68,6 @@ export function changeCount(product,bucket){
                     }
                 }
             })
-            dispatch(clear());
             dispatch(reFresh(bucket));
         }
     }
@@ -94,28 +103,7 @@ export function changeCount(product,bucket){
     }
 
 // SORT LOGIC
-
-    export function sortByPrice(bucket,priceFromMinToMax){
-        return(dispatch)=>{
-            bucket.sort(function(min, max){
-                if(priceFromMinToMax){
-                    return min.price-max.price;
-                }else{
-                    return max.price-min.price
-                }
-            })
-            dispatch(sortPrice());
-            dispatch(clear());
-            dispatch(reFresh(bucket));
-        }
-    }
-
-    export function sortPrice(){
-        return{
-            type: SORT_PRICE
-        }
-    }
-
+    //BY ABC
     export function sortByABC(bucket,nameFromAToZ){
         return(dispatch)=>{
             bucket.sort(function(a, b){
@@ -135,7 +123,6 @@ export function changeCount(product,bucket){
                     }
                 })
             dispatch(sortName());
-            dispatch(clear());
             dispatch(reFresh(bucket));
         }
     }
@@ -146,6 +133,50 @@ export function changeCount(product,bucket){
         }
     }
 
+    //BY PRICE
+    export function sortByPrice(bucket,priceFromMinToMax){
+        return(dispatch)=>{
+            bucket.sort(function(min, max){
+                if(priceFromMinToMax){
+                    return min.price-max.price;
+                }else{
+                    return max.price-min.price
+                }
+            })
+            dispatch(sortPrice());
+            dispatch(reFresh(bucket));
+        }
+    }
+
+    export function sortPrice(){
+        return{
+            type: SORT_PRICE
+        }
+    }
+
+    //BY COUNT
+
+    export function sortByCount(bucket,countFromMinToMax){
+        return(dispatch)=>{
+            bucket.sort(function(min, max){
+                if(countFromMinToMax){
+                    return min.count-max.count;
+                }else{
+                    return max.count-min.count
+                }
+            })
+            dispatch(sortCount());
+            dispatch(reFresh(bucket));
+        }
+    }
+
+    export function sortCount(){
+        return{
+            type: SORT_COUNT
+        }
+    }
+
+    //BY TOTAL
     export function sortByTotalProduct(bucket,totalFromMinToMax){
         return(dispatch)=>{
             bucket.sort(function(min, max){
@@ -156,7 +187,6 @@ export function changeCount(product,bucket){
                 }
             })
             dispatch(sortTotal());
-            dispatch(clear());
             dispatch(reFresh(bucket));
         }
     }
@@ -166,3 +196,5 @@ export function changeCount(product,bucket){
             type: SORT_TOTAL
         }
     }
+
+

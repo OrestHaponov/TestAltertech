@@ -1,9 +1,19 @@
 //BUCKET
 export const REFRESH_BUCKET = "REFRESH_BUCKET"
-export const CLEAR = "CLEAR"
 export const ADD_TOTAL_COUNT = "ADD_TOTAL_COUNT"
-export const SORT_PRICE = "SORT_PRICE"
 export const SORT_NAME = "SORT_NAME"
+export const SORT_COUNT = "SORT_COUNT"
+export const SORT_PRICE = "SORT_PRICE"
 export const SORT_TOTAL = "SORT_TOTAL"
 
-
+//ADD PRODUCT
+export const CHANGE_NAME = "CHANGE_NAME"
+export const CHANGE_COUNT = "CHANGE_COUNT"
+export const CHANGE_PRICE = "CHANGE_PRICE"
+export const COUNT_ERROR = "COUNT_ERROR"
+export const NAME_ERROR = "NAME_ERROR"
+export const PRICE_ERROR = "PRICE_ERROR"
+export const CLEAR_FORM = "CLEAR_FORM"
+export const REMOVE_NAME_BORDER = "REMOVE_NAME_BORDER"
+export const REMOVE_COUNT_BORDER = "REMOVE_COUNT_BORDER"
+export const REMOVE_PRICE_BORDER = "REMOVE_PRICE_BORDER"

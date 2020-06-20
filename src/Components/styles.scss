@@ -1,19 +1,24 @@
 .bucket{
+    margin-top: 30px;
     .wrapper{
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
+        width: 500px;
         margin-top: 40px;
+        margin: 0 auto;
     }
     table{
+        flex-basis: 100%;
         border-collapse: collapse;
-        border: 1px solid #000;
-        width: 500px;
+        border: 2px solid #F57E5A;
+        border-radius: 10px;
+        background: #E9EFF8;
+        text-align: center;
         thead:first-child{
             th{
+                text-align: center;
                 cursor: pointer;
-            }
-            th:nth-child(2){
-                cursor: auto;
             }
         }
         th{
@@ -22,7 +27,7 @@
         }
         td{
             position: relative;
-            border-top: 1px solid #000;
+            border-top: 1px solid #F57E5A;
             padding: 20px;
             img{
                 position: absolute;
@@ -33,10 +38,73 @@
         }
         .count{
             display: flex;
+            justify-content: center;
             input{
-                width: 50px;
+                text-align: center;
+                width: 30px;
+                &::-webkit-outer-spin-button,&::-webkit-inner-spin-button{
+                    display: none;
+                }
             }
         }
     }
 }
 
+
+.add{
+    display: flex;
+    justify-content: center;
+    .wrapper{
+        width: 350px;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #FF9E72;
+        border-radius: 10px;
+    }
+    &__form{
+        width: 200px;
+        display: flex;
+        flex-wrap: wrap;
+        .error{
+            border: 2px solid red;
+        }
+        input{
+            display: flex;
+            flex-basis: 100%;
+            justify-content: space-between;
+            height: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.116);
+            background: #E9EFF8;
+            margin-bottom: 30px;
+            padding-left: 10px;
+            outline: none;
+            &:last-child {
+                display: flex;
+                justify-content: center;
+                background-color: #FF9E72;
+                border: 1px solid #F57E5A;
+                border-bottom: 3px solid #F57E5A;
+                color: #fff;
+                font-size: 15px;
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 576px){
+    .bucket{
+        .wrapper{
+            width: 250px;
+        }
+    }
+    .add{
+        .wrapper{
+            width: 300px;
+        }
+    }
+}
